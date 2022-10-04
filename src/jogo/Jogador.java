@@ -1,64 +1,23 @@
 
 package jogo;
 
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
+import javax.swing.ImageIcon;
 import java.awt.event.KeyEvent;
 import java.net.URL;
-import javax.swing.ImageIcon;
 
-public class Jogador implements ActionListener {
+public class Jogador extends Nave {
 
-   
-    private Image imagem;
-    private int x;
-    private int y;
-    
-    private int incrementoX;   
-    private int IncrementoY;
-    private Tiro tiro;
-    
-    
-    public int getX() {
-        return x;
+
+    public Jogador(Integer linha, Integer coluna, Tiro tiro) {
+        super(linha, coluna, tiro);
     }
 
-    
-    public void setX(int x) {
-        this.x = x;
-    }
-
-   
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-    public Jogador(Integer linha, Integer coluna){
-        x = linha;
-        y=coluna;
-        lerFoguete();
-        incrementoX=0;
-        IncrementoY=0;
-        
-    }
-    
     public void lerFoguete(){
         URL url = getClass().getClassLoader().getResource("res//playerShip1_red.png");
         ImageIcon imagem = new ImageIcon(url);
         this.setImagem(imagem.getImage());
     }
 
-   
-    public Image getImagem() {
-        return imagem;
-    }
-    
-    
     
     public void atualizar(){
         x += getIncrementoX();
@@ -88,46 +47,11 @@ public class Jogador implements ActionListener {
         if(codigo == KeyEvent.VK_ENTER){
             var t = getTiro();
             if(t==null || t.y <30){
-                setTiro(new Tiro(x+45,y-30));
+                setTiro(new TiroPlayer(x+45,y-30));
                 getTiro().load();
             }
         }
         
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-    }
-
- 
-    public void setImagem(Image imagem) {
-        this.imagem = imagem;
-    }
-
-   
-    public int getIncrementoX() {
-        return incrementoX;
-    }
-
-    public void setIncrementoX(int incrementoX) {
-        this.incrementoX = incrementoX;
-    }
-
-    public int getIncrementoY() {
-        return IncrementoY;
-    }
-
-    public void setIncrementoY(int IncrementoY) {
-        this.IncrementoY = IncrementoY;
-    }
-
-   
-    public Tiro getTiro() {
-        return tiro;
-    }
-
-    public void setTiro(Tiro tiro) {
-        this.tiro = tiro;
     }
     
 }

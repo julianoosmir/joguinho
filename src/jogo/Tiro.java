@@ -1,58 +1,61 @@
-
 package jogo;
 
-import java.awt.Image;
-import java.net.URL;
-import javax.swing.ImageIcon;
+import java.awt.*;
 
-public class Tiro {
+abstract class Tiro {
     private int x;
     int y;
-    private Image imagem;
-    
+    protected Image imagem;
+    private int altura;
+    private int largura;
+      
     public Tiro(int x,int y){
+        load();
         this.x=x;
         this.y=y;
+        setLargura(getImagem().getWidth(null));
+        setAltura(getImagem().getHeight(null));
     }
     
-    
-    
-    public void update(){
-        this.y -=10;
-    }
-    
-    public void load(){
-          URL url = getClass().getClassLoader().getResource("res//laserGreen05.png");
-        ImageIcon imagem = new ImageIcon(url);
-        this.imagem = imagem.getImage();
-    }
-      
-    
+    abstract void update();
+
+    abstract void load();
+
     public int getX() {
         return x;
     }
-
     public void setX(int x) {
         this.x = x;
     }
-
-    
     public int getY() {
         return y;
     }
-
-    
     public void setY(int y) {
         this.y = y;
     }
-
-   
     public Image getImagem() {
         return imagem;
     }
-
-    
     public void setImagem(Image imagem) {
         this.imagem = imagem;
+    }
+
+    public int getAltura() {
+        return this.altura;
+    }
+
+    public void setAltura(int altura) {
+        this.altura = altura;
+    }
+
+    public int getLargura() {
+        return this.largura;
+    }
+
+    public void setLargura(int largura) {
+        this.largura = largura;
+    }
+    public Rectangle getBounds() {
+        return new Rectangle(getX(), getY(), getAltura(), getLargura());
     }
 }
